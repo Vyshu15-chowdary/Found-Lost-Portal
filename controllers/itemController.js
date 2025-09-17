@@ -2,10 +2,26 @@ import Item from "../models/Item.js";
 
 // Create new item
 const createItem = async (req, res) => {
-  const { title, description, location, status } = req.body;
-  const item = new Item({ title, description, location, status, user: req.user._id });
-  const createdItem = await item.save();
-  res.status(201).json(createdItem);
+  try {
+    const { title, description, location, status } = req.body;
+
+    if (!req.user) {
+      return res.status(401).json({ message: "Not authorized, user missing" });
+    }
+
+    const item = new Item({
+      title,
+      description,
+      location,
+      status,
+      user: req.user._id, // ✅ Now req.user will be filled
+    });
+
+    const createdItem = await item.save();
+    res.status(201).json(createdItem);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 };
 
 // Get all items
