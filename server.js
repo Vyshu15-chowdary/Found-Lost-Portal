@@ -3,7 +3,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
-
+import authRoutes from "./routes/authRoutes.js";
+import itemRoutes from "./routes/itemRoutes.js";
 dotenv.config();
 
 // Connect to MongoDB
@@ -14,6 +15,10 @@ const app = express();
 // Middleware
 app.use(express.json()); // Parse JSON
 app.use(cors());
+
+//Register routes
+app.use("/api/auth",authRoutes);
+app.use("/api/items",itemRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
