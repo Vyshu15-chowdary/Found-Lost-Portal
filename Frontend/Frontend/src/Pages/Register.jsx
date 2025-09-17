@@ -16,6 +16,7 @@ export default function Register() {
   };
 
   return (
+    <div className="container">
     <form onSubmit={handleSubmit}>
       <h2>Register</h2>
       <input
@@ -35,5 +36,6 @@ export default function Register() {
       />
       <button type="submit">Register</button>
     </form>
+    </div>
   );
 }
