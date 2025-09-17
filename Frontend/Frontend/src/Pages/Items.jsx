@@ -13,7 +13,7 @@ export default function Items() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h2>Lost & Found Items</h2>
       {items.map((item) => (
         <div key={item._id} style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
