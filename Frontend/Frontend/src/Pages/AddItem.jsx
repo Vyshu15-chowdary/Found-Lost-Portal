@@ -8,8 +8,12 @@ export default function AddItem() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await API.post("/items", form);
+    try{
+    await API.post("/api/items", form);
     navigate("/items");
+    } catch(error){
+      console.error("error adding item:",error.response?.data || error.message);
+    }
   };
 
   return (
