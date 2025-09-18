@@ -2,6 +2,7 @@ import { useState } from "react";
 import API from "../Services/api";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -10,10 +11,16 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await API.post("/auth/login", form);
+    try{
+    const { data } = await API.post("http://localhost:5000/api/auth/login", form);
     login(data);
     navigate("/items");
-  };
+  } catch(err){
+    console.error("Login failed:",err.response?.data || err.message);
+    alert("login failed:"+(err.response?.error || "server error"));
+
+  }
+}; 
 
   return (
     <form onSubmit={handleSubmit}>

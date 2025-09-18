@@ -6,7 +6,7 @@ export default function Items() {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const { data } = await API.get("/items");
+      const { data } = await API.get("/api/items");
       setItems(data);
     };
     fetchItems();
@@ -16,7 +16,7 @@ export default function Items() {
     <div className="container">
       <h2>Lost & Found Items</h2>
       {items.map((item) => (
-        <div key={item._id} style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
+        <div key={item._id} style={{ border: "1px solid gray", margin: "10px", padding: "10px" }} className="item-card">
           <h3>{item.title}</h3>
           <p>{item.description}</p>
           <p><b>Location:</b> {item.location}</p>
