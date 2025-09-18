@@ -37,7 +37,8 @@ export default function AddItem() {
         <option value="lost">Lost</option>
         <option value="found">Found</option>
       </select>
-      <button type="submit">Add Item</button>
+      <button type="submit" disabled={!form.title || !form.description || !form.location}>Add Item</button>
+      
     </form>
   );
 }
